@@ -1,0 +1,2 @@
+rootProject.name='DogBreedClassifier'
+include ':app'
