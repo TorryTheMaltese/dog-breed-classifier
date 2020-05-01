@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -105,6 +106,7 @@ public class WriteInfoActivity extends AppCompatActivity {
         dog.fur = fur;
 
         storeData(dog);
+        startNewActivity();
     }
 
     public void storeData(DogInfo dog){
@@ -114,7 +116,7 @@ public class WriteInfoActivity extends AppCompatActivity {
         File dir = makeDirectory(STRSAVEPATH);
         File file = makeFile(dir, STRSAVEPATH+SAVEFILEPATH);
         writeFile(file, content.getBytes());
-        readFile(file);
+//        readFile(file);
     }
 
     public String loadJSONFromAsset(){
@@ -199,5 +201,10 @@ public class WriteInfoActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void startNewActivity(){
+        Intent intent = new Intent(WriteInfoActivity.this, ResultActivity.class);
+        startActivity(intent);
     }
 }
