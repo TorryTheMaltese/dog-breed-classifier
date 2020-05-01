@@ -12,6 +12,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -27,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -39,6 +42,7 @@ import java.io.Serializable;
 public class WriteInfoActivity extends AppCompatActivity {
 
     static class DogInfo implements Serializable {
+        String imageUri;
         String name;
         Integer age;
         Integer weight;
@@ -48,9 +52,10 @@ public class WriteInfoActivity extends AppCompatActivity {
 
     String size;
     String fur;
+    Uri profileImage;
 
     public static final String STRSAVEPATH = Environment.getExternalStorageDirectory()+"/testFolder/";
-    public static final String SAVEFILEPATH = "dogInfo.json";
+    public static final String SAVEFILENAME = "dogInfo.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,19 +82,28 @@ public class WriteInfoActivity extends AppCompatActivity {
             }
         });
         getImage();
+
     }
 
-    public void getImage(){
+    public void getImage() {
         ImageView image = findViewById(R.id.profileImg);
         if(getIntent().getExtras().getByteArray("imageByte") != null) {
             byte[] byteArray = getIntent().getExtras().getByteArray("imageByte");
             Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            profileImage = getImageUri(this,bmp);
             image.setImageBitmap(bmp);
         } else {
             String imageString = getIntent().getExtras().getString("imageString");
-            Uri imageUri = Uri.parse(imageString);
-            image.setImageURI(imageUri);
+            profileImage = Uri.parse(imageString);
+            image.setImageURI(profileImage);
         }
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -104,6 +118,7 @@ public class WriteInfoActivity extends AppCompatActivity {
         dog.weight = Integer.parseInt(dogWeight.getText().toString());
         dog.size = size;
         dog.fur = fur;
+        dog.imageUri = profileImage.toString();
 
         storeData(dog);
         startNewActivity();
@@ -114,7 +129,7 @@ public class WriteInfoActivity extends AppCompatActivity {
         String content = gson.toJson(dog);
 
         File dir = makeDirectory(STRSAVEPATH);
-        File file = makeFile(dir, STRSAVEPATH+SAVEFILEPATH);
+        File file = makeFile(dir, STRSAVEPATH+SAVEFILENAME);
         writeFile(file, content.getBytes());
 //        readFile(file);
     }
@@ -183,24 +198,6 @@ public class WriteInfoActivity extends AppCompatActivity {
         }
         else{result = false;}
         return result;
-    }
-
-    private void readFile(File file){
-        int readCount=0;
-        if(file!=null && file.exists()){
-            try{
-                FileInputStream fis = new FileInputStream(file);
-                readCount = (int) file.length();
-                byte[] buffer = new byte[readCount];
-                fis.read(buffer);
-//                for(int i=0; i<file.length(); i++){Log.e("READ_FILE", );}
-                fis.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     public void startNewActivity(){

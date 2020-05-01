@@ -2,9 +2,11 @@ package com.example.dogbreedclassifier;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -35,6 +37,11 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         makePieChart();
+    }
+
+    public void goHomePage(View view){
+        Intent intent = new Intent(ResultActivity.this, HomeActivity.class);
+        startActivity(intent);
     }
 
     public void makePieChart(){
