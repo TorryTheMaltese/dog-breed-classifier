@@ -34,7 +34,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
-<<<<<<< HEAD
+
         <service
             android:name=".MyFirebaseMessagingService"
             android:stopWithTask="false">
@@ -42,8 +42,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-=======
->>>>>>> 59f4e8a83d4a7e0b03f6085d85ca0398583f4946
+
     </application>
 
 </manifest>

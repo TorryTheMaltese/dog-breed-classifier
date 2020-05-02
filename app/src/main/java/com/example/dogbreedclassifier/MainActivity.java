@@ -3,12 +3,8 @@ package com.example.dogbreedclassifier;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-<<<<<<< HEAD
 import android.media.MediaPlayer;
 import android.util.Log;
-=======
->>>>>>> 59f4e8a83d4a7e0b03f6085d85ca0398583f4946
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,16 +16,11 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-<<<<<<< HEAD
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-=======
->>>>>>> 59f4e8a83d4a7e0b03f6085d85ca0398583f4946
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,34 +29,28 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     @Override
-<<<<<<< HEAD
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       FirebaseInstanceId.getInstance().getInstanceId().
-               addOnCompleteListener(new OnCompleteListener<InstanceIdResult>()
-               {
-                   @Override
-                   public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                       if (!task.isSuccessful()){
-                           Log.w("FCM Log","getInstanceId failed",
-                                   task.getException());
-                           return;
-                       }
-                       String token = task.getResult().getToken();
-                       Log.d("FCM Log","FCM 토큰: "+ token);
-                   }
-               });
-=======
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
->>>>>>> 59f4e8a83d4a7e0b03f6085d85ca0398583f4946
-    }
+        FirebaseInstanceId.getInstance().getInstanceId().
+                addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("FCM Log", "getInstanceId failed",
+                                    task.getException());
+                            return;
+                        }
+                        String token = task.getResult().getToken();
+                        Log.d("FCM Log", "FCM 토큰: " + token);
+                    }
+                });
+         }
 
-    private int GET_GALLERY_IMAGE = 200;
+        private int GET_GALLERY_IMAGE = 200;
     public void onGalleryBtnClicked(View view){
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
