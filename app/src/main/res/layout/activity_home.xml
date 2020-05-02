@@ -12,127 +12,121 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
-            <LinearLayout
+            <com.daimajia.swipe.SwipeLayout
+                android:id="@+id/sample1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/saved_dog_image"
-                    android:layout_width="120dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:backgroundTint="@color/colorLight"
-                    android:src="@drawable/ic_gallery" />
+                <LinearLayout
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:weightSum="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="#66ddff00"
+                    android:id="@+id/bottom_wrapper">
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="이름"
-                    android:textColor="@color/colorText"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:background="#ffffff"
+                    android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/saved_dog_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="댕댕이"
-                    android:textColor="@color/colorText"
-                    android:textSize="25sp" />
-            </LinearLayout>
+                    <ImageView
+                        android:id="@+id/saved_dog_image"
+                        android:layout_width="120dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:backgroundTint="@color/colorLight"
+                        android:src="@drawable/ic_gallery" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="이름"
+                        android:textColor="@color/colorText"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/saved_dog_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="댕댕이"
+                        android:textColor="@color/colorText"
+                        android:textSize="25sp" />
+                </LinearLayout>
+
+            </com.daimajia.swipe.SwipeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp"
-                >
+                android:padding="10dp">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:onClick="startNewActivity"
-                    app:srcCompat="@android:drawable/ic_menu_add"
-                    android:backgroundTint="@color/colorLight"
                     android:background="@color/colorLight"
-                    />
+                    android:backgroundTint="@color/colorLight"
+                    android:onClick="startNewActivity"
+                    app:srcCompat="@android:drawable/ic_menu_add" />
 
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="주변 온도"
-                android:textSize="20sp"
-                android:textColor="@color/colorText"
-                android:textStyle="bold"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp" />
+                android:layout_marginTop="30dp"
+                android:text="주변 온도"
+                android:textColor="@color/colorText"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/amb_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
                 android:text="주변 온도"
-                android:textSize="20sp"
                 android:textColor="@color/colorText"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="10dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="현재 위치"
-                android:textSize="20sp"
-                android:textColor="@color/colorText"
-                android:textStyle="bold"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp" />
-
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="현재위치"
-                android:textSize="20sp"
-                android:textColor="@color/colorText"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="10dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:text="지역 온도"
-                android:textSize="20sp"
                 android:textColor="@color/colorText"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="지역 온도"
-                android:textSize="20sp"
-                android:textColor="@color/colorText"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:text="지역 온도"
+                android:textColor="@color/colorText"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
     </ScrollView>
-
 </LinearLayout>

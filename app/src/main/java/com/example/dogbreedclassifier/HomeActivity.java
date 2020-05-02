@@ -26,6 +26,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,6 +66,8 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
     Sensor sensor;
     float sensorValue;
 
+    SwipeLayout swipe_card;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,42 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         assert sensorManager != null;
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+
+        swipe_card = findViewById(R.id.sample1);
+        swipe_card.setShowMode(SwipeLayout.ShowMode.LayDown);
+        swipe_card.addDrag(SwipeLayout.DragEdge.Right, findViewById(R.id.bottom_wrapper));
+        swipe_card.addSwipeListener(new SwipeLayout.SwipeListener() {
+
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+
+            }
+        });
 
         ActivityCompat.requestPermissions(this, new String[] {ACCESS_FINE_LOCATION},1);
 
