@@ -1,7 +1,9 @@
 package com.example.dogbreedclassifier;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +40,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class WriteInfoActivity extends AppCompatActivity {
 
@@ -62,6 +65,13 @@ public class WriteInfoActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_info);
+
+//        ActionBar ab = getSupportActionBar();
+//        ab.hide();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorBackground));
+        }
 
         RadioGroup dogSize = findViewById(R.id.dog_size),
                 dogFur = findViewById(R.id.dog_fur);

@@ -20,6 +20,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src/main/res', 'src/main/res/fonts'
+            }
+            assets {
+                srcDirs 'src/main/assets', 'src/main/assets/fonts'
+            }
+        }
+    }
 
 }
 

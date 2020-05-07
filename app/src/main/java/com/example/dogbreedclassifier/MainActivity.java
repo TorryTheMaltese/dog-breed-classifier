@@ -2,8 +2,12 @@ package com.example.dogbreedclassifier;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.util.Log;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorBackground));
+        }
+
+//        ActionBar ab = getSupportActionBar();
+//        ab.hide();
 
         FirebaseInstanceId.getInstance().getInstanceId().
                 addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {

@@ -2,6 +2,7 @@ package com.example.dogbreedclassifier;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Base64;
@@ -72,7 +74,11 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        }
         readFile(file);
+        externalFontFamily();
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         assert sensorManager != null;
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
@@ -163,6 +169,10 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
         sensorManager.unregisterListener(this);
     }
 
+    public void externalFontFamily(){
+
+    }
+
     public void getWeather(Location location){
         double longitude = location.getLongitude();
         double latitude = location.getLatitude();
@@ -248,7 +258,11 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
         savedImage.setImageURI(Uri.parse(dogInfo.imageUri));
 
         TextView savedName = findViewById(R.id.saved_dog_name);
+        TextView savedAge = findViewById(R.id.saved_dog_age);
+        TextView savedWeight = findViewById(R.id.saved_dog_weight);
         savedName.setText(dogInfo.name);
+        savedAge.setText(String.valueOf(dogInfo.age));
+        savedWeight.setText(String.valueOf(dogInfo.weight));
     }
 
     private void readFile(File file){
