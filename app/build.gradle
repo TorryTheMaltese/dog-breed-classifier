@@ -65,4 +65,7 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:support-v4:20.+'
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+
+    // tensorflow
+    implementation 'org.tensorflow:tensorflow-android:1.8.0'
 }

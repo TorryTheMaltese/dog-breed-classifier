@@ -24,6 +24,25 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="강아지 정보를 적어주세요"
+                    android:layout_marginTop="20dp"
+                    android:textSize="30sp"
+                    android:fontFamily="@font/nanum_square_round_bold"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="정확히 작성할 수록 결과도 정확해집니다."
+                    android:textSize="15sp"
+                    android:fontFamily="@font/nanum_square_round_regular"
+                    android:gravity="center"
+                    />
+
+
                 <ImageView
                     android:id="@+id/profileImg"
                     android:layout_width="370dp"
@@ -219,21 +238,25 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="소형견" />
+                            android:text="소형견"
+                            android:fontFamily="@font/nanum_square_round_regular"
+                            />
 
                         <RadioButton
                             android:id="@+id/size_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="중형견" />
+                            android:text="중형견"
+                            android:fontFamily="@font/nanum_square_round_regular"/>
 
                         <RadioButton
                             android:id="@+id/size_big"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="대형견" />
+                            android:text="대형견"
+                            android:fontFamily="@font/nanum_square_round_regular"/>
 
                     </RadioGroup>
                 </FrameLayout>
@@ -256,7 +279,8 @@
                         android:fontFamily="@font/nanum_square_round_regular"
                         android:text="털 특성"
                         android:textColor="@color/colorText"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        />
 
                     <RadioGroup
                         android:id="@+id/dog_fur"
@@ -273,14 +297,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="단일모" />
+                            android:text="단일모"
+                            android:fontFamily="@font/nanum_square_round_regular"
+                            />
 
                         <RadioButton
                             android:id="@+id/fur_double_coat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="이중모" />
+                            android:text="이중모"
+                            android:fontFamily="@font/nanum_square_round_regular"
+                            />
 
                     </RadioGroup>
                 </FrameLayout>
@@ -288,11 +316,11 @@
 
             </LinearLayout>
             <FrameLayout
+                android:id="@+id/result_btn"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginTop="30dp"
-                android:onClick="getData"
                 >
 
                 <ImageView

@@ -19,6 +19,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
@@ -40,6 +41,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class WriteInfoActivity extends AppCompatActivity {
@@ -56,6 +58,7 @@ public class WriteInfoActivity extends AppCompatActivity {
     String size;
     String fur;
     Uri profileImage;
+    byte[] imageByteArray = {};
 
     public static final String STRSAVEPATH = Environment.getExternalStorageDirectory()+"/testFolder/";
     public static final String SAVEFILENAME = "dogInfo.json";
@@ -66,12 +69,18 @@ public class WriteInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_info);
 
-//        ActionBar ab = getSupportActionBar();
-//        ab.hide();
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorBackground));
+            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
+        FrameLayout button = findViewById(R.id.result_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    getData();
+                }
+            }
+        });
 
         RadioGroup dogSize = findViewById(R.id.dog_size),
                 dogFur = findViewById(R.id.dog_fur);
@@ -116,8 +125,9 @@ public class WriteInfoActivity extends AppCompatActivity {
         return Uri.parse(path);
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void getData(View view){
+    public void getData(){
         EditText dogName = findViewById(R.id.dog_name),
                 dogAge = findViewById(R.id.dog_age),
                 dogWeight = findViewById(R.id.dog_weight);
@@ -131,7 +141,7 @@ public class WriteInfoActivity extends AppCompatActivity {
         dog.imageUri = profileImage.toString();
 
         storeData(dog);
-        startNewActivity();
+        startNewActivity(profileImage);
     }
 
     public void storeData(DogInfo dog){
@@ -144,20 +154,20 @@ public class WriteInfoActivity extends AppCompatActivity {
 //        readFile(file);
     }
 
-    public String loadJSONFromAsset(){
-        String json = null;
-        try {
-            InputStream input = getAssets().open("DogInfo.json");
-            int size = input.available();
-            byte[] buffer = new byte[size];
-            input.read(buffer);
-            input.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return json;
-    }
+//    public String loadJSONFromAsset(){
+//        String json = null;
+//        try {
+//            InputStream input = getAssets().open("DogInfo.json");
+//            int size = input.available();
+//            byte[] buffer = new byte[size];
+//            input.read(buffer);
+//            input.close();
+//            json = new String(buffer, "UTF-8");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return json;
+//    }
 
     private File makeDirectory(String dir_path){
         File dir = new File(dir_path);
@@ -210,8 +220,9 @@ public class WriteInfoActivity extends AppCompatActivity {
         return result;
     }
 
-    public void startNewActivity(){
+    public void startNewActivity(Uri imageUri){
         Intent intent = new Intent(WriteInfoActivity.this, ResultActivity.class);
+        intent.putExtra("imageUri", imageUri.toString());
         startActivity(intent);
     }
 }

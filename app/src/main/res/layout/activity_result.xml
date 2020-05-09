@@ -17,7 +17,21 @@
             android:orientation="vertical"
             android:gravity="center"
             >
-
+            <ImageView
+                android:id="@+id/result_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="20dp"
+                android:src="@mipmap/dog"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="분석 결과"
+                android:textSize="30sp"
+                android:fontFamily="@font/nanum_square_round_bold"
+                android:gravity="center"
+                />
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/result_chart"
