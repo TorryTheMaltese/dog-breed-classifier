@@ -4,135 +4,277 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".HomeActivity">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
+            android:paddingTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_weight="1"
                 >
 
-                <ImageView
-                    android:id="@+id/saved_dog_image"
-                    android:layout_width="120dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:backgroundTint="@color/colorLight"
-                    android:src="@drawable/ic_gallery" />
+                <com.daimajia.swipe.SwipeLayout
+                    android:id="@+id/sample1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <FrameLayout
+                        android:id="@+id/bottom_wrapper"
+                        android:layout_width="160dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="187dp"
+                            android:src="@drawable/ic_rounded_image"
+                            android:tint="@color/colorPrimary" />
+
+                        <ImageButton
+                            android:layout_gravity="center"
+                            android:id="@+id/imagebtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxHeight="100dp"
+                            android:maxWidth="100dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_plus"
+                            android:background="@android:color/transparent"
+                            />
+                    </FrameLayout>
+                    //-----------------추가--------------------
+                    <FrameLayout
+                        android:id="@+id/swipe_left"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_rounded_image"
+                            android:tint="#fff" />
+
+
+
+                    </FrameLayout>
+                   //--------------------------
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_rounded_image"
+                            android:tint="#fff" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            >
+                            <ImageView
+                                android:id="@+id/saved_dog_image"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+
+                                android:src="@mipmap/dog"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                />
+
+                            <TextView
+                                android:id="@+id/saved_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@+id/saved_dog_image"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_toEndOf="@+id/saved_dog_image"
+                                android:layout_toRightOf="@+id/saved_dog_image"
+                                android:text="이름"
+                                android:textColor="@color/colorText"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/nanum_square_round_regular"
+                                 />
+
+
+
+                            <TextView
+                                android:id="@+id/saved_dog_name"
+                                android:text="댕댕이"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorText"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/nanum_square_round_bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/saved_name"
+                                android:layout_toEndOf="@+id/saved_dog_image"
+                                android:layout_toRightOf="@+id/saved_dog_image" />
+
+                            <TextView
+                                android:id="@+id/saved_dog_age"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@+id/saved_dog_image"
+                                android:layout_toStartOf="@+id/saved_age"
+                                android:layout_toLeftOf="@+id/saved_age"
+                                android:text="00"
+                                android:textColor="@color/colorText"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/nanum_square_round_bold"/>
+
+                            <TextView
+                                android:id="@+id/saved_age"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@+id/saved_dog_image"
+                                android:layout_toStartOf="@+id/saved_dog_weight"
+                                android:layout_toLeftOf="@+id/saved_dog_weight"
+                                android:layout_marginRight="20dp"
+                                android:text="살"
+                                android:textColor="@color/colorText"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/nanum_square_round_regular"
+                                 />
+                            <TextView
+                                android:id="@+id/saved_dog_weight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@+id/saved_dog_image"
+                                android:layout_toStartOf="@+id/saved_weight"
+                                android:layout_toLeftOf="@+id/saved_weight"
+                                android:text="00"
+                                android:textColor="@color/colorText"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/nanum_square_round_bold"/>
+
+                            <TextView
+                                android:id="@+id/saved_weight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@+id/saved_dog_image"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="20dp"
+                                android:text="kg"
+                                android:textColor="@color/colorText"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/nanum_square_round_regular"
+                                />
+                        </RelativeLayout>
+
+                    </FrameLayout>
+
+                </com.daimajia.swipe.SwipeLayout>
 
                 <TextView
-                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="이름"
+                    android:layout_marginTop="30dp"
+                    android:text="주변 온도"
+                    android:textColor="@color/colorText"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/amb_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="주변 온도"
+                    android:textColor="@color/colorText"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:text="지역 온도"
                     android:textColor="@color/colorText"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/saved_dog_name"
+                    android:id="@+id/temp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="댕댕이"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="지역 온도"
                     android:textColor="@color/colorText"
-                    android:textSize="25sp" />
+                    android:textSize="20sp" />
+
             </LinearLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                >
+                android:layout_height="200dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/ic_top_rounded_image" />
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal|top"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
                     android:onClick="startNewActivity"
-                    app:srcCompat="@android:drawable/ic_menu_add"
-                    android:backgroundTint="@color/colorLight"
-                    android:background="@color/colorLight"
-                    />
+                    android:src="@drawable/ic_rounded_image" />
 
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="주변 온도"
-                android:textSize="20sp"
-                android:textColor="@color/colorText"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp" />
-
-            <TextView
-                android:id="@+id/amb_temp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="주변 온도"
-                android:textSize="20sp"
-                android:textColor="@color/colorText"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="10dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="현재 위치"
-                android:textSize="20sp"
-                android:textColor="@color/colorText"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp" />
-
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="현재위치"
-                android:textSize="20sp"
-                android:textColor="@color/colorText"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="10dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="지역 온도"
-                android:textSize="20sp"
-                android:textColor="@color/colorText"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp" />
-
-            <TextView
-                android:id="@+id/temp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="지역 온도"
-                android:textSize="20sp"
-                android:textColor="@color/colorText"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="10dp" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="80dp"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/nanum_square_round_bold"
+                    android:text="강아지 견종 분석하기"
+                    android:textColor="@color/colorText"
+                    android:textSize="25sp" />
+            </FrameLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
+
 
 </LinearLayout>
