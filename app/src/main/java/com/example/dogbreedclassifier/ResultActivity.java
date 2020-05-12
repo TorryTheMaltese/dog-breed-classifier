@@ -8,6 +8,10 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -25,6 +29,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
@@ -38,6 +45,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import android.database.sqlite.SQLiteDatabase;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,7 +70,7 @@ public class ResultActivity extends AppCompatActivity {
     TextView resultsView;
 
     PieChart pieChart;
-    float[] yData = {10,20,70};
+    float[] yData = {10, 20, 70};
     String[] xData = {"푸들", "시추", "말티즈"};
 
     @Override
@@ -184,7 +192,7 @@ public class ResultActivity extends AppCompatActivity {
             }
     }
 
-    void updateResults(final List<Classifier.Recognition> results){
+    void updateResults(final List<Classifier.Recognition> results) {
         Log.e("TEST updateResults", results.toString());
         makePieChart(results);
 //        runOnUiThread(new Runnable() {
@@ -240,7 +248,7 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
 
-    public void goHomePage(View view){
+    public void goHomePage(View view) {
         Intent intent = new Intent(ResultActivity.this, HomeActivity.class);
         startActivity(intent);
     }
@@ -284,11 +292,11 @@ public class ResultActivity extends AppCompatActivity {
         dataSet.setSelectionShift(5);
 
         ArrayList<Integer> colors = new ArrayList<>();
-        for (int c: ColorTemplate.VORDIPLOM_COLORS) colors.add(c);
-        for (int c: ColorTemplate.JOYFUL_COLORS) colors.add(c);
-        for (int c: ColorTemplate.COLORFUL_COLORS) colors.add(c);
-        for (int c: ColorTemplate.LIBERTY_COLORS) colors.add(c);
-        for (int c: ColorTemplate.PASTEL_COLORS) colors.add(c);
+        for (int c : ColorTemplate.VORDIPLOM_COLORS) colors.add(c);
+        for (int c : ColorTemplate.JOYFUL_COLORS) colors.add(c);
+        for (int c : ColorTemplate.COLORFUL_COLORS) colors.add(c);
+        for (int c : ColorTemplate.LIBERTY_COLORS) colors.add(c);
+        for (int c : ColorTemplate.PASTEL_COLORS) colors.add(c);
         colors.add(ColorTemplate.getHoloBlue());
         dataSet.setColors(colors);
 
@@ -303,4 +311,6 @@ public class ResultActivity extends AppCompatActivity {
         pieChart.highlightValue(null);
         pieChart.invalidate();
     }
+
+
 }

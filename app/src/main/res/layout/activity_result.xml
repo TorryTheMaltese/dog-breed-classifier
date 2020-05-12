@@ -39,12 +39,14 @@
                 android:layout_height="500dp"
                 android:layout_margin="30dp"
                 android:contentDescription="TEST CHART" />
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HOME"
                 android:onClick="goHomePage"
                 android:layout_margin="20dp" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

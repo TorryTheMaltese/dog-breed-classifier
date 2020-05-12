@@ -8,6 +8,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
@@ -25,9 +27,10 @@ import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.daimajia.swipe.SwipeLayout;
 
 import org.json.JSONException;
@@ -44,6 +47,7 @@ import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -70,10 +74,25 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
 
     SwipeLayout swipe_card;
 
+    //------------추가------------
+    ImageButton imagebtn;
+    //--------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+//-------------------------추가--------------------------------------------
+
+        imagebtn = (ImageButton) findViewById(R.id.imagebtn);
+        imagebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+//--------------------------------------------------------------------------
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
@@ -86,6 +105,11 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
         swipe_card = findViewById(R.id.sample1);
         swipe_card.setShowMode(SwipeLayout.ShowMode.LayDown);
         swipe_card.addDrag(SwipeLayout.DragEdge.Right, findViewById(R.id.bottom_wrapper));
+
+       //------------------추가----------------------
+        swipe_card.addDrag(SwipeLayout.DragEdge.Left, findViewById(R.id.swipe_left));
+        //-------------------------------------------
+
         swipe_card.addSwipeListener(new SwipeLayout.SwipeListener() {
 
             @Override
@@ -118,8 +142,7 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
 
             }
         });
-
-        ActivityCompat.requestPermissions(this, new String[] {ACCESS_FINE_LOCATION},1);
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, 1);
 
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -174,15 +197,16 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void getWeather(Location location){
+
         double longitude = location.getLongitude();
         double latitude = location.getLatitude();
 
-        String url = "http://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid="+api_key;
+        String url = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + api_key;
         ReceiveWeatherTask receiveUseTask = new ReceiveWeatherTask();
         receiveUseTask.execute(url);
     }
 
-    private class ReceiveWeatherTask extends AsyncTask<String, Void, JSONObject>{
+    private class ReceiveWeatherTask extends AsyncTask<String, Void, JSONObject> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -190,24 +214,25 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
 
         @Override
         protected JSONObject doInBackground(String... strings) {
-            try{
+            try {
                 HttpURLConnection conn = (HttpURLConnection) new URL(strings[0]).openConnection();
                 conn.setConnectTimeout(10000);
                 conn.setReadTimeout(10000);
                 conn.connect();
 
-                if(conn.getResponseCode()==HttpURLConnection.HTTP_OK){
+                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     InputStream is = conn.getInputStream();
                     InputStreamReader reader = new InputStreamReader(is);
                     BufferedReader in = new BufferedReader(reader);
 
                     String readed;
-                    while((readed = in.readLine()) != null){
+                    while ((readed = in.readLine()) != null) {
                         JSONObject jObject = new JSONObject(readed);
                         return jObject;
                     }
+                } else {
+                    return null;
                 }
-                else {return null;}
                 return null;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -222,21 +247,22 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
         @Override
         protected void onPostExecute(JSONObject result) {
             Log.e("API", result.toString());
-            if(result!=null){
+            if (result != null) {
                 String nowTemp = "";
                 double nowCTemp;
                 String main = "";
                 String description = "";
 
-                try{
+                try {
                     nowTemp = result.getJSONObject("main").getString("temp");
                     main = result.getJSONArray("weather").getJSONObject(0).getString("main");
                     description = result.getJSONArray("weather").getJSONObject(0).getString("description");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                nowCTemp = Double.parseDouble(nowTemp)-273;
-                String msg = description+"\n"+"현재온도 : "+nowCTemp;
+                nowCTemp = Double.parseDouble(nowTemp) - 273;
+                String ctmp = String.format("%.1f", nowCTemp);
+                String msg = description + "\n" + "현재온도 : " + ctmp + "℃";
                 TextView text = findViewById(R.id.temp);
                 text.setText(msg);
             }
@@ -244,7 +270,7 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public void onSensorChanged(SensorEvent event) {
-        if(event.sensor==sensor) {
+        if (event.sensor == sensor) {
             sensorValue = event.values[0];
         }
     }
@@ -253,7 +279,7 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-    public void setData(DogInfo dogInfo){
+    public void setData(DogInfo dogInfo) {
         ImageView savedImage = findViewById(R.id.saved_dog_image);
         savedImage.setImageURI(Uri.parse(dogInfo.imageUri));
 
@@ -265,10 +291,10 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
         savedWeight.setText(String.valueOf(dogInfo.weight));
     }
 
-    private void readFile(File file){
-        int readCount=0;
-        if(file!=null && file.exists()){
-            try{
+    private void readFile(File file) {
+        int readCount = 0;
+        if (file != null && file.exists()) {
+            try {
                 FileInputStream fis = new FileInputStream(file);
                 readCount = (int) file.length();
                 byte[] buffer = new byte[readCount];
@@ -293,8 +319,10 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-    public void startNewActivity(View view){
+    public void startNewActivity(View view) {
         Intent intent = new Intent(HomeActivity.this, MainActivity.class);
         startActivity(intent);
     }
+
+
 }

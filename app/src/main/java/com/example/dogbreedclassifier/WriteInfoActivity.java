@@ -5,25 +5,34 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -41,6 +50,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -54,7 +64,11 @@ public class WriteInfoActivity extends AppCompatActivity {
         String size;
         String fur;
     }
-
+//--------추가----------
+    myDBHelper myHelper;
+    EditText dog_name,dog_age,dog_weight;
+    SQLiteDatabase sqlDB;
+//-----------------
     String size;
     String fur;
     Uri profileImage;
@@ -63,12 +77,34 @@ public class WriteInfoActivity extends AppCompatActivity {
     public static final String STRSAVEPATH = Environment.getExternalStorageDirectory()+"/testFolder/";
     public static final String SAVEFILENAME = "dogInfo.json";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_info);
+        //--------------------- 추가---------------------------------------------
+        dog_name=(EditText)findViewById(R.id.dog_name);
+        dog_age=(EditText) findViewById(R.id.dog_age);
+        dog_weight=(EditText)findViewById(R.id.dog_weight);
+        ImageButton btn_insert=(ImageButton) findViewById(R.id.btn_insert);
+        myHelper = new myDBHelper(this);
 
+        btn_insert.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
+            @Override
+            public void onClick(View v) {
+              sqlDB = myHelper.getWritableDatabase();
+              sqlDB.execSQL("INSERT INTO dogTBL VALUES ('" +
+                      dog_name.getText().toString() + "',"
+                      + dog_age.getText().toString() +
+                      ", "+ dog_weight.getText().toString()+",'"+ size +"','"+fur+"');");
+                sqlDB.close();
+               Toast.makeText(getApplicationContext(),"추가완료",0).show();
+
+            }
+        });
+        //------------------------------------------------------------------
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
@@ -78,6 +114,7 @@ public class WriteInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     getData();
+
                 }
             }
         });
@@ -103,7 +140,22 @@ public class WriteInfoActivity extends AppCompatActivity {
         getImage();
 
     }
-
+   //------------------------추가--------------------------------
+     public class myDBHelper extends SQLiteOpenHelper{
+     public myDBHelper(Context context){
+         super(context,"DOGINFO",null,1);
+     }
+     @Override
+       public void onCreate(SQLiteDatabase db){
+         db.execSQL("CREATE TABLE dogTBL (Dname CHAR(20) , Dage INTEGER, Dweight INTEGER, Dsize char(20), Dfur char(20) );");
+     }
+     @Override
+       public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
+         db.execSQL("DROP TABLE IF EXISTS dogTBL");
+         onCreate(db);
+     }
+    }
+    //----------------------------------------------------------
     public void getImage() {
         ImageView image = findViewById(R.id.profileImg);
         if(getIntent().getExtras().getByteArray("imageByte") != null) {
@@ -225,4 +277,6 @@ public class WriteInfoActivity extends AppCompatActivity {
         intent.putExtra("imageUri", imageUri.toString());
         startActivity(intent);
     }
+
+
 }

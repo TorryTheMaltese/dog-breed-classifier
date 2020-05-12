@@ -39,10 +39,41 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="187dp"
                             android:src="@drawable/ic_rounded_image"
                             android:tint="@color/colorPrimary" />
+
+                        <ImageButton
+                            android:layout_gravity="center"
+                            android:id="@+id/imagebtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxHeight="100dp"
+                            android:maxWidth="100dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_plus"
+                            android:background="@android:color/transparent"
+                            />
                     </FrameLayout>
+                    // -----------------추가--------------------
+                    <FrameLayout
+                        android:id="@+id/swipe_left"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_rounded_image"
+                            android:tint="#fff" />
+
+
+
+                    </FrameLayout>
+                   //--------------------------
 
                     <FrameLayout
                         android:layout_width="match_parent"
