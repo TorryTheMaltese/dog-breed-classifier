@@ -29,5 +29,5 @@
 
 ## 앱 디자인
 ![1](./UIdesign/슬라이드1.png)
-![1](./UIdesign/슬라이드2.png)
-![1](./UIdesign/슬라이드3.png)
+![2](./UIdesign/슬라이드2.png)
+![3](./UIdesign/슬라이드3.png)
