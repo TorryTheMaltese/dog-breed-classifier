@@ -1,17 +1,18 @@
 package com.example.dogbreedclassifier;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -23,23 +24,16 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import com.daimajia.swipe.SwipeLayout;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -54,9 +48,6 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class HomeActivity extends AppCompatActivity implements SensorEventListener {
 
-    public static final String STRSAVEPATH = Environment.getExternalStorageDirectory() + "/testFolder/";
-    public static final String SAVEFILENAME = "dogInfo.json";
-    File file = new File(STRSAVEPATH + SAVEFILENAME);
     String api_key = "e42e319b66ef5c4af146d334e6f117dc";
 
     static class DogInfo implements Serializable {
@@ -72,76 +63,66 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
     Sensor sensor;
     float sensorValue;
 
-    SwipeLayout swipe_card;
+    RecyclerView mRecyclerView = null;
+    Adapter mAdapter = null;
+    ArrayList<com.example.dogbreedclassifier.RecyclerView> mList = new ArrayList<>();
 
-    //------------추가------------
-    ImageButton imagebtn;
-    //--------------------------
+    private BackPressCloseHandler backPressCloseHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-//-------------------------추가--------------------------------------------
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
-        imagebtn = (ImageButton) findViewById(R.id.imagebtn);
-        imagebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-//--------------------------------------------------------------------------
+        mRecyclerView= findViewById(R.id.recycler);
+        mAdapter= new Adapter(mList);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
-        readFile(file);
         externalFontFamily();
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         assert sensorManager != null;
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+        openDB();
 
-        swipe_card = findViewById(R.id.sample1);
-        swipe_card.setShowMode(SwipeLayout.ShowMode.LayDown);
-        swipe_card.addDrag(SwipeLayout.DragEdge.Right, findViewById(R.id.bottom_wrapper));
-
-       //------------------추가----------------------
-        swipe_card.addDrag(SwipeLayout.DragEdge.Left, findViewById(R.id.swipe_left));
-        //-------------------------------------------
-
-        swipe_card.addSwipeListener(new SwipeLayout.SwipeListener() {
-
+        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
-            public void onStartOpen(SwipeLayout layout) {
+            public boolean onInterceptTouchEvent(@NonNull final RecyclerView rv, @NonNull MotionEvent e) {
+                if(e.getAction() == MotionEvent.ACTION_DOWN){
+                    final View child = rv.findChildViewUnder(e.getX(), e.getY());
 
+                    ImageButton ib = rv.getChildViewHolder(child).itemView.findViewById(R.id.imagebtn);
+                    ib.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int currentPosition = rv.findViewHolderForAdapterPosition(rv.getChildLayoutPosition(child)).getAdapterPosition();
+                            Log.e("DEL", "");
+                            deleteItem(currentPosition);
+                            mAdapter.deleteItem(currentPosition);
+                            mAdapter.notifyItemRemoved(currentPosition);
+                        }
+                    });
+                }
+                return false;
             }
 
             @Override
-            public void onOpen(SwipeLayout layout) {
-
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
             }
 
             @Override
-            public void onStartClose(SwipeLayout layout) {
-
-            }
-
-            @Override
-            public void onClose(SwipeLayout layout) {
-
-            }
-
-            @Override
-            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
-
-            }
-
-            @Override
-            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
             }
         });
+
+
+
         ActivityCompat.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION}, 1);
 
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -192,7 +173,83 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
         sensorManager.unregisterListener(this);
     }
 
+    @Override
+    public void onBackPressed(){
+        backPressCloseHandler.onBackPressed();
+    }
+
     public void externalFontFamily(){
+
+    }
+
+    public class BackPressCloseHandler {
+        private long backKeyPressedTime= 0;
+        private Toast toast;
+        private Activity activity;
+
+        public BackPressCloseHandler(Activity context){ this.activity = context; }
+
+        public void onBackPressed(){
+            if(System.currentTimeMillis() > backKeyPressedTime + 2000){
+                backKeyPressedTime = System.currentTimeMillis();
+                toast = Toast.makeText(activity, "뒤로가기 버튼을 두 번 누르면 종료됩니다.", Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+            else{
+                activity.finish();
+                toast.cancel();
+            }
+        }
+    }
+
+    public void addItem(Uri image, String dogName, String dogAge, String dogWeight){
+        com.example.dogbreedclassifier.RecyclerView item= new com.example.dogbreedclassifier.RecyclerView();
+        item.setDog_image(image);
+        item.setDog_name(dogName);
+        item.setDog_age(dogAge);
+        item.setDog_weight(dogWeight);
+
+        mList.add(item);
+    }
+
+    public void deleteItem(Integer position){
+        Integer id = position+1;
+        String name = mList.get(position).getDog_name();
+        DBHelper DBHelper;
+        SQLiteDatabase sqlDB;
+        DBHelper = new DBHelper(this);
+        sqlDB = DBHelper.getWritableDatabase();
+
+        sqlDB.execSQL("DELETE FROM dogTBL WHERE Dname = '"+name+"';");
+        sqlDB.close();
+    }
+
+    public void openDB(){
+        DBHelper DBHelper;
+        SQLiteDatabase sqlDB;
+        DBHelper = new DBHelper(this);
+        DogInfo dogInfo = new DogInfo();
+
+        sqlDB = DBHelper.getReadableDatabase();
+        Cursor c = sqlDB.rawQuery("SELECT * FROM dogTBL", null);
+
+        if(c.moveToFirst()){
+            while(!c.isAfterLast()){
+                dogInfo.name = c.getString(c.getColumnIndex("Dname"));
+                dogInfo.age = c.getInt(c.getColumnIndex("Dage"));
+                dogInfo.weight = c.getInt(c.getColumnIndex("Dweight"));
+                dogInfo.size = c.getString(c.getColumnIndex("Dsize"));
+                dogInfo.fur = c.getString(c.getColumnIndex("Dfur"));
+                dogInfo.imageUri = c.getString(c.getColumnIndex("Dimage"));
+                Uri imageUri = Uri.parse(dogInfo.imageUri);
+
+                addItem(imageUri, dogInfo.name, String.valueOf(dogInfo.age), String.valueOf(dogInfo.weight));
+                mAdapter.notifyDataSetChanged();
+
+                c.moveToNext();
+            }
+        }
 
     }
 
@@ -279,45 +336,6 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
-    public void setData(DogInfo dogInfo) {
-        ImageView savedImage = findViewById(R.id.saved_dog_image);
-        savedImage.setImageURI(Uri.parse(dogInfo.imageUri));
-
-        TextView savedName = findViewById(R.id.saved_dog_name);
-        TextView savedAge = findViewById(R.id.saved_dog_age);
-        TextView savedWeight = findViewById(R.id.saved_dog_weight);
-        savedName.setText(dogInfo.name);
-        savedAge.setText(String.valueOf(dogInfo.age));
-        savedWeight.setText(String.valueOf(dogInfo.weight));
-    }
-
-    private void readFile(File file) {
-        int readCount = 0;
-        if (file != null && file.exists()) {
-            try {
-                FileInputStream fis = new FileInputStream(file);
-                readCount = (int) file.length();
-                byte[] buffer = new byte[readCount];
-                fis.read(buffer);
-                String content = new String(buffer, "UTF-8");
-                JSONObject object = new JSONObject(content);
-
-                DogInfo dogInfo = new DogInfo();
-                dogInfo.imageUri = object.getString("imageUri");
-                dogInfo.name = object.getString("name");
-                dogInfo.age = object.getInt("age");
-                dogInfo.weight = object.getInt("weight");
-                setData(dogInfo);
-                fis.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public void startNewActivity(View view) {
         Intent intent = new Intent(HomeActivity.this, MainActivity.class);

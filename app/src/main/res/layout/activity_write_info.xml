@@ -326,23 +326,24 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
+                    android:id="@+id/btn_insert"
                     android:layout_gravity="bottom"
                     android:src="@drawable/ic_top_rounded_image" />
 
-                <ImageButton
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/btn_insert"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxHeight="80dp"
-                    android:maxWidth="80dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_plus"
-                    android:background="@android:color/transparent"
-                    />
+<!--                <ImageButton-->
+<!--                    android:layout_gravity="left"-->
+<!--                    android:layout_marginLeft="30dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:id="@+id/btn_insert"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:maxHeight="80dp"-->
+<!--                    android:maxWidth="80dp"-->
+<!--                    android:adjustViewBounds="true"-->
+<!--                    android:scaleType="fitCenter"-->
+<!--                    android:src="@drawable/ic_plus"-->
+<!--                    android:background="@android:color/transparent"-->
+<!--                    />-->
 
                 <TextView
                     android:layout_width="fill_parent"

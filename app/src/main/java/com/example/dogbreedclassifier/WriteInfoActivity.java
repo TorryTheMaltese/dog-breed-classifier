@@ -65,7 +65,8 @@ public class WriteInfoActivity extends AppCompatActivity {
         String fur;
     }
 //--------추가----------
-    myDBHelper myHelper;
+    DBHelper myHelper;
+//    myDBHelper myHelper;
     EditText dog_name,dog_age,dog_weight;
     SQLiteDatabase sqlDB;
 //-----------------
@@ -83,27 +84,24 @@ public class WriteInfoActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_info);
-        //--------------------- 추가---------------------------------------------
-        dog_name=(EditText)findViewById(R.id.dog_name);
-        dog_age=(EditText) findViewById(R.id.dog_age);
-        dog_weight=(EditText)findViewById(R.id.dog_weight);
-        ImageButton btn_insert=(ImageButton) findViewById(R.id.btn_insert);
-        myHelper = new myDBHelper(this);
+//        dog_name=(EditText)findViewById(R.id.dog_name);
+//        dog_age=(EditText) findViewById(R.id.dog_age);
+//        dog_weight=(EditText)findViewById(R.id.dog_weight);
+//        myHelper = new myDBHelper(this);
 
-        btn_insert.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("WrongConstant")
-            @Override
-            public void onClick(View v) {
-              sqlDB = myHelper.getWritableDatabase();
-              sqlDB.execSQL("INSERT INTO dogTBL VALUES ('" +
-                      dog_name.getText().toString() + "',"
-                      + dog_age.getText().toString() +
-                      ", "+ dog_weight.getText().toString()+",'"+ size +"','"+fur+"');");
-                sqlDB.close();
-               Toast.makeText(getApplicationContext(),"추가완료",0).show();
-
-            }
-        });
+//        btn_insert.setOnClickListener(new View.OnClickListener() {
+//            @SuppressLint("WrongConstant")
+//            @Override
+//            public void onClick(View v) {
+//                sqlDB = myHelper.getWritableDatabase();
+//                sqlDB.execSQL("INSERT INTO dogTBL VALUES ('" +
+//                        dog_name.getText().toString() + "',"
+//                        + dog_age.getText().toString() +
+//                        ", "+ dog_weight.getText().toString()+",'"+ size +"','"+fur+"');");
+//                sqlDB.close();
+//                Toast.makeText(getApplicationContext(),"추가완료",0).show();
+//            }
+//        });
         //------------------------------------------------------------------
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
@@ -113,8 +111,8 @@ public class WriteInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    addDatabase();
                     getData();
-
                 }
             }
         });
@@ -141,20 +139,20 @@ public class WriteInfoActivity extends AppCompatActivity {
 
     }
    //------------------------추가--------------------------------
-     public class myDBHelper extends SQLiteOpenHelper{
-     public myDBHelper(Context context){
-         super(context,"DOGINFO",null,1);
-     }
-     @Override
-       public void onCreate(SQLiteDatabase db){
-         db.execSQL("CREATE TABLE dogTBL (Dname CHAR(20) , Dage INTEGER, Dweight INTEGER, Dsize char(20), Dfur char(20) );");
-     }
-     @Override
-       public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
-         db.execSQL("DROP TABLE IF EXISTS dogTBL");
-         onCreate(db);
-     }
-    }
+//     public class myDBHelper extends SQLiteOpenHelper{
+//     public myDBHelper(Context context){
+//         super(context,"DOGINFO",null,1);
+//     }
+//     @Override
+//       public void onCreate(SQLiteDatabase db){
+//         db.execSQL("CREATE TABLE dogTBL (Did INTEGER primary key autoincrement, Dname CHAR(20) , Dage INTEGER, Dweight INTEGER, Dsize char(20), Dfur char(20) );");
+//     }
+//     @Override
+//       public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
+//         db.execSQL("DROP TABLE IF EXISTS dogTBL");
+//         onCreate(db);
+//     }
+//    }
     //----------------------------------------------------------
     public void getImage() {
         ImageView image = findViewById(R.id.profileImg);
@@ -192,84 +190,24 @@ public class WriteInfoActivity extends AppCompatActivity {
         dog.fur = fur;
         dog.imageUri = profileImage.toString();
 
-        storeData(dog);
         startNewActivity(profileImage);
     }
 
-    public void storeData(DogInfo dog){
-        Gson gson = new Gson();
-        String content = gson.toJson(dog);
+    public void addDatabase(){
+        dog_name=(EditText)findViewById(R.id.dog_name);
+        dog_age=(EditText) findViewById(R.id.dog_age);
+        dog_weight=(EditText)findViewById(R.id.dog_weight);
+//        myHelper = new myDBHelper(this);
+        myHelper = new DBHelper(this);
+        String dog_image = profileImage.toString();
 
-        File dir = makeDirectory(STRSAVEPATH);
-        File file = makeFile(dir, STRSAVEPATH+SAVEFILENAME);
-        writeFile(file, content.getBytes());
-//        readFile(file);
-    }
-
-//    public String loadJSONFromAsset(){
-//        String json = null;
-//        try {
-//            InputStream input = getAssets().open("DogInfo.json");
-//            int size = input.available();
-//            byte[] buffer = new byte[size];
-//            input.read(buffer);
-//            input.close();
-//            json = new String(buffer, "UTF-8");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return json;
-//    }
-
-    private File makeDirectory(String dir_path){
-        File dir = new File(dir_path);
-        if(!dir.exists()){
-            dir.mkdir();
-            Log.e("DIR_TEST","dir does not exist");
-        }
-        else{
-            Log.i("DIR_TEST", "dir exist");
-        }
-        return dir;
-    }
-
-    private File makeFile(File dir, String file_path){
-        File file = null;
-        boolean isSuccess = false;
-        Log.e("DIR_ID_DIRECTORY", dir.toString());
-
-            file = new File(file_path);
-                try{
-                    isSuccess = file.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                finally {
-                    Log.e("CREATE+FILE", "creating file = "+isSuccess);
-                }
-        return file;
-    }
-
-    private boolean writeFile(File file, byte[] file_content){
-        boolean result;
-        FileOutputStream fos;
-        if(file != null && file.exists() && file_content!=null){
-            try{
-                fos = new FileOutputStream(file);
-                try{
-                    fos.write(file_content);
-                    fos.flush();
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            result = true;
-        }
-        else{result = false;}
-        return result;
+        sqlDB = myHelper.getWritableDatabase();
+        sqlDB.execSQL("INSERT INTO dogTBL(Dname,Dage,Dweight,Dsize,Dfur,Dimage) VALUES ('" +
+                dog_name.getText().toString() + "',"
+                + dog_age.getText().toString() +
+                ", "+ dog_weight.getText().toString()+",'"+ size +"','"+fur+"','"+dog_image+"');");
+        sqlDB.close();
+        Toast.makeText(getApplicationContext(),"추가완료",Toast.LENGTH_SHORT).show();
     }
 
     public void startNewActivity(Uri imageUri){
