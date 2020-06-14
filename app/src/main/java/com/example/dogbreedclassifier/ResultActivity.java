@@ -1,19 +1,14 @@
 package com.example.dogbreedclassifier;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -23,34 +18,27 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import android.database.sqlite.SQLiteDatabase;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -72,6 +60,7 @@ public class ResultActivity extends AppCompatActivity {
     PieChart pieChart;
     float[] yData = {10, 20, 70};
     String[] xData = {"푸들", "시추", "말티즈"};
+    List final_result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +96,36 @@ public class ResultActivity extends AppCompatActivity {
                  e.printStackTrace();
              }
          }
+    }
+
+    public void addDatabase(){
+        DBHelper myHelper;
+        myHelper = new DBHelper(this);
+        SQLiteDatabase sqlDB;
+
+        String dName, dSize, dFur, dImage, listString;
+        int dAge, dWeight;
+
+        dName = getIntent().getExtras().getString("dog_name");
+        dAge = getIntent().getExtras().getInt("dog_age");
+        dWeight = getIntent().getExtras().getInt("dog_weight");
+        dSize = getIntent().getExtras().getString("dog_size");
+        dFur = getIntent().getExtras().getString("dog_fur");
+        dImage = getIntent().getExtras().getString("imageUri");
+        listString="";
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            listString= TextUtils.join(", ", final_result);
+            System.out.println(listString);
+            Log.e("RES", "listString : "+listString);
+        }
+
+        sqlDB = myHelper.getWritableDatabase();
+        sqlDB.execSQL("INSERT INTO dogTBL(Dname,Dage,Dweight,Dsize,Dfur,Dimage, Dresult) VALUES ('" +
+                dName + "',"
+                + dAge +
+                ", "+ dWeight+",'"+ dSize +"','"+dFur+"','"+dImage+"','"+listString+"');");
+        sqlDB.close();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -245,10 +264,19 @@ public class ResultActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Classifier.Recognition> recognitions) {
             if(!isCancelled()) updateResults(recognitions);
+            Button btnSave = findViewById(R.id.btn_save);
+            btnSave.setVisibility(View.VISIBLE);
+            btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addDatabase();
+                    goHomePage();
+                }
+            });
         }
     }
 
-    public void goHomePage(View view) {
+    public void goHomePage() {
         Intent intent = new Intent(ResultActivity.this, HomeActivity.class);
         startActivity(intent);
     }
@@ -262,6 +290,7 @@ public class ResultActivity extends AppCompatActivity {
         pieChart.setRotationAngle(0);
         pieChart.setRotationEnabled(true);
 
+        final_result = results;
         addChartData(results);
 
         Legend legend = pieChart.getLegend();

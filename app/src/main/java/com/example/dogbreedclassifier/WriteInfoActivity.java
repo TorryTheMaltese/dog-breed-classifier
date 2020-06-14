@@ -64,45 +64,17 @@ public class WriteInfoActivity extends AppCompatActivity {
         String size;
         String fur;
     }
-//--------추가----------
-    DBHelper myHelper;
-//    myDBHelper myHelper;
-    EditText dog_name,dog_age,dog_weight;
-    SQLiteDatabase sqlDB;
-//-----------------
+
     String size;
     String fur;
     Uri profileImage;
-    byte[] imageByteArray = {};
-
-    public static final String STRSAVEPATH = Environment.getExternalStorageDirectory()+"/testFolder/";
-    public static final String SAVEFILENAME = "dogInfo.json";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_info);
-//        dog_name=(EditText)findViewById(R.id.dog_name);
-//        dog_age=(EditText) findViewById(R.id.dog_age);
-//        dog_weight=(EditText)findViewById(R.id.dog_weight);
-//        myHelper = new myDBHelper(this);
 
-//        btn_insert.setOnClickListener(new View.OnClickListener() {
-//            @SuppressLint("WrongConstant")
-//            @Override
-//            public void onClick(View v) {
-//                sqlDB = myHelper.getWritableDatabase();
-//                sqlDB.execSQL("INSERT INTO dogTBL VALUES ('" +
-//                        dog_name.getText().toString() + "',"
-//                        + dog_age.getText().toString() +
-//                        ", "+ dog_weight.getText().toString()+",'"+ size +"','"+fur+"');");
-//                sqlDB.close();
-//                Toast.makeText(getApplicationContext(),"추가완료",0).show();
-//            }
-//        });
-        //------------------------------------------------------------------
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
@@ -111,7 +83,6 @@ public class WriteInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    addDatabase();
                     getData();
                 }
             }
@@ -138,22 +109,7 @@ public class WriteInfoActivity extends AppCompatActivity {
         getImage();
 
     }
-   //------------------------추가--------------------------------
-//     public class myDBHelper extends SQLiteOpenHelper{
-//     public myDBHelper(Context context){
-//         super(context,"DOGINFO",null,1);
-//     }
-//     @Override
-//       public void onCreate(SQLiteDatabase db){
-//         db.execSQL("CREATE TABLE dogTBL (Did INTEGER primary key autoincrement, Dname CHAR(20) , Dage INTEGER, Dweight INTEGER, Dsize char(20), Dfur char(20) );");
-//     }
-//     @Override
-//       public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
-//         db.execSQL("DROP TABLE IF EXISTS dogTBL");
-//         onCreate(db);
-//     }
-//    }
-    //----------------------------------------------------------
+
     public void getImage() {
         ImageView image = findViewById(R.id.profileImg);
         if(getIntent().getExtras().getByteArray("imageByte") != null) {
@@ -190,29 +146,18 @@ public class WriteInfoActivity extends AppCompatActivity {
         dog.fur = fur;
         dog.imageUri = profileImage.toString();
 
-        startNewActivity(profileImage);
+        startNewActivity(profileImage, dog.name, dog.age, dog.weight, dog.size, dog.fur);
     }
 
-    public void addDatabase(){
-        dog_name=(EditText)findViewById(R.id.dog_name);
-        dog_age=(EditText) findViewById(R.id.dog_age);
-        dog_weight=(EditText)findViewById(R.id.dog_weight);
-//        myHelper = new myDBHelper(this);
-        myHelper = new DBHelper(this);
-        String dog_image = profileImage.toString();
-
-        sqlDB = myHelper.getWritableDatabase();
-        sqlDB.execSQL("INSERT INTO dogTBL(Dname,Dage,Dweight,Dsize,Dfur,Dimage) VALUES ('" +
-                dog_name.getText().toString() + "',"
-                + dog_age.getText().toString() +
-                ", "+ dog_weight.getText().toString()+",'"+ size +"','"+fur+"','"+dog_image+"');");
-        sqlDB.close();
-        Toast.makeText(getApplicationContext(),"추가완료",Toast.LENGTH_SHORT).show();
-    }
-
-    public void startNewActivity(Uri imageUri){
+    public void startNewActivity(Uri imageUri, String dName, int dAge, int dWeight, String dSize, String dFur){
         Intent intent = new Intent(WriteInfoActivity.this, ResultActivity.class);
         intent.putExtra("imageUri", imageUri.toString());
+        intent.putExtra("dog_name", dName);
+        intent.putExtra("dog_age", dAge);
+        intent.putExtra("dog_weight", dWeight);
+        intent.putExtra("dog_size", dSize);
+        intent.putExtra("dog_fur", dFur);
+
         startActivity(intent);
     }
 

@@ -8,7 +8,9 @@ public class RecyclerView {
     private String dog_weight;
     private String dog_size;
     private String dog_fur;
+    private String dog_result;
     private Uri dog_image;
+    private int id;
 
     public String getDog_name() {
         return dog_name;
@@ -58,6 +60,22 @@ public class RecyclerView {
         this.dog_image = dog_image;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDog_result() {
+        return dog_result;
+    }
+
+    public void setDog_result(String dog_result) {
+        this.dog_result = dog_result;
+    }
+
     public RecyclerView() {
         this.dog_name = dog_name;
         this.dog_age = dog_age;
@@ -65,5 +83,7 @@ public class RecyclerView {
         this.dog_size = dog_size;
         this.dog_fur = dog_fur;
         this.dog_image = dog_image;
+        this.id = id;
+        this.dog_result = dog_result;
     }
 }

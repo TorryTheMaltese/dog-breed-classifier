@@ -1,6 +1,8 @@
 package com.example.dogbreedclassifier;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +38,7 @@ public class Adapter extends androidx.recyclerview.widget.RecyclerView.Adapter<A
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final RecyclerView item = mData.get(position);
 
         holder.image.setImageURI(item.getDog_image());
@@ -78,12 +80,21 @@ public class Adapter extends androidx.recyclerview.widget.RecyclerView.Adapter<A
             }
         });
 
+        holder.dog_info_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("CARD", ""+item.getDog_name());
+                Intent intent = new Intent(v.getContext(), DetailActivity.class);
+                intent.putExtra("id", item.getId());
+
+                v.getContext().startActivity(intent);
+            }
+        });
+
 //        holder.imageBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Log.e("TEST", "IMAGE BTN CLICKED !");
-//                mData.remove(position);
-//                notifyItemRemoved(position);
+//                deleteItem(position);
 //            }
 //        });
     }
@@ -94,7 +105,11 @@ public class Adapter extends androidx.recyclerview.widget.RecyclerView.Adapter<A
     }
 
     public void deleteItem(int position){
-
+        Log.e("DEL", "mData before removed : "+mData);
+        mData.remove(position);
+        Log.e("DEL", "mData after removed : "+mData);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mData.size());
     }
 
 
@@ -116,6 +131,8 @@ public class Adapter extends androidx.recyclerview.widget.RecyclerView.Adapter<A
             imageBtn = itemView.findViewById(R.id.imagebtn);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.sample1);
             bottom_wrapper = itemView.findViewById(R.id.bottom_wrapper);
+
+            dog_info_card = itemView.findViewById(R.id.dog_info_card);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

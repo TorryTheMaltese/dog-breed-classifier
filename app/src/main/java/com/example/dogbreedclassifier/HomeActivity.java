@@ -27,7 +27,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,7 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
         Integer weight;
         String size;
         String fur;
+        Integer id;
     }
 
     SensorManager sensorManager;
@@ -104,7 +107,10 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
                             Log.e("DEL", "");
                             deleteItem(currentPosition);
                             mAdapter.deleteItem(currentPosition);
-                            mAdapter.notifyItemRemoved(currentPosition);
+//                            mAdapter.notifyItemRemoved(currentPosition);
+//                            mList.remove(currentPosition);
+//                            mAdapter.notifyItemRemoved(currentPosition);
+//                            mAdapter.notifyItemRangeChanged(currentPosition, mAdapter.getItemCount());
                         }
                     });
                 }
@@ -203,26 +209,27 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-    public void addItem(Uri image, String dogName, String dogAge, String dogWeight){
+    public void addItem(Uri image, String dogName, String dogAge, String dogWeight, int id){
         com.example.dogbreedclassifier.RecyclerView item= new com.example.dogbreedclassifier.RecyclerView();
         item.setDog_image(image);
         item.setDog_name(dogName);
         item.setDog_age(dogAge);
         item.setDog_weight(dogWeight);
+        item.setId(id);
 
         mList.add(item);
     }
 
     public void deleteItem(Integer position){
-        Integer id = position+1;
-        String name = mList.get(position).getDog_name();
+        int id = mList.get(position).getId();
         DBHelper DBHelper;
         SQLiteDatabase sqlDB;
         DBHelper = new DBHelper(this);
         sqlDB = DBHelper.getWritableDatabase();
 
-        sqlDB.execSQL("DELETE FROM dogTBL WHERE Dname = '"+name+"';");
+        sqlDB.execSQL("DELETE FROM dogTBL WHERE Did = '"+id+"';");
         sqlDB.close();
+        mList.remove(position);
     }
 
     public void openDB(){
@@ -236,6 +243,7 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
 
         if(c.moveToFirst()){
             while(!c.isAfterLast()){
+                dogInfo.id = c.getInt(c.getColumnIndex("Did"));
                 dogInfo.name = c.getString(c.getColumnIndex("Dname"));
                 dogInfo.age = c.getInt(c.getColumnIndex("Dage"));
                 dogInfo.weight = c.getInt(c.getColumnIndex("Dweight"));
@@ -244,7 +252,7 @@ public class HomeActivity extends AppCompatActivity implements SensorEventListen
                 dogInfo.imageUri = c.getString(c.getColumnIndex("Dimage"));
                 Uri imageUri = Uri.parse(dogInfo.imageUri);
 
-                addItem(imageUri, dogInfo.name, String.valueOf(dogInfo.age), String.valueOf(dogInfo.weight));
+                addItem(imageUri, dogInfo.name, String.valueOf(dogInfo.age), String.valueOf(dogInfo.weight), dogInfo.id);
                 mAdapter.notifyDataSetChanged();
 
                 c.moveToNext();

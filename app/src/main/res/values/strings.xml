@@ -1,249 +1,432 @@
 <resources>
-    <string name="app_name">DogBreedClassifier</string>
-    <string-array name="breeds_array">
-        <item>아펜핀셔</item>
-        <item>아프간하운드</item>
-        <item>아프리카들개</item>
-        <item>에어데일 테리어</item>
-        <item>아메리칸 스태퍼드셔 테리어</item>
-        <item>아펜젤러세넨훈드</item>
-        <item>오스트레일리안 테리어</item>
-        <item>바센지</item>
-        <item>바셋 하운드</item>
-        <item>비글</item>
-        <item>베들링턴 테리어</item>
-        <item>버나즈 마운틴 독</item>
-        <item>킹 찰스 스패니얼</item>
-        <item>블러드하운드</item>
-        <item>블루틱 쿤 하운드</item>
-        <item>보더콜리</item>
-        <item>보더 테리어</item>
-        <item>보르조이</item>
-        <item>부비에데플랑드르</item>
-        <item>복서</item>
-        <item>브뤼셀 그리펀</item>
-        <item>브리아드</item>
-        <item>브리트니</item>
-        <item>불마스티프</item>
-        <item>케언 테리어</item>
-        <item>카디건 웰시코기</item>
-        <item>체서피크베이 리트리버</item>
-        <item>치와와</item>
-        <item>차우차우</item>
-        <item>클럼버 스파니엘</item>
-        <item>플랫 코티드 리트리버</item>
-        <item>아이리쉬 소프트코티드 휘튼 테리어</item>
-        <item>코카 스패니얼</item>
-        <item>콜리</item>
-        <item>컬리 코티드 리트리버</item>
-        <item>댄디 딘몬트 테리어</item>
-        <item>딩고</item>
-        <item>도베르만</item>
-        <item>잉글리시 폭스하운드</item>
-        <item>르웰린</item>
-        <item>잉글리시 스프링어 스패니얼</item>
-        <item>엔틀버쳐 마운틴 독</item>
-        <item>아메리칸 에스키모 도그</item>
-        <item>프렌치 불독</item>
-        <item>저먼 셰퍼드</item>
-        <item>자이언트 슈나우저</item>
-        <item>골든 리트리버</item>
-        <item>고든 세터</item>
-        <item>그레이터 스위스 마운틴 도그</item>
-        <item>그레이트 데인</item>
-        <item>그레이트 피레니즈</item>
-        <item>그루넨달</item>
-        <item>폭스 테리어</item>
-        <item>저먼 쇼트헤어드 포인터</item>
-        <item>아이리시 세터</item>
-        <item>아이리시 테리어</item>
-        <item>아이리시 워터 스패니얼</item>
-        <item>아이리시 울프하운드</item>
-        <item>이탈리안 그레이하운드</item>
-        <item>제페니스 친</item>
-        <item>키스혼드</item>
-        <item>오스트레일리안 켈피</item>
-        <item>케리 블루 테리어</item>
-        <item>코몬돌</item>
-        <item>쿠바츠</item>
-        <item>래브라도 리트리버</item>
-        <item>레이클랜드 테리어</item>
-        <item>레온베르거</item>
-        <item>라사압소</item>
-        <item>닥스훈트</item>
-        <item>알래스칸 맬러뮤트</item>
-        <item>말리노이즈</item>
-        <item>멕시칸 헤어리스 도그</item>
-        <item>미니어처 핀셔</item>
-        <item>미니어처 푸들</item>
-        <item>미니어처 슈나우저</item>
-        <item>뉴펀들랜드</item>
-        <item>노퍽 테리어</item>
-        <item>노르웨이언 엘크하운드</item>
-        <item>노리치 테리어</item>
-        <item>올드 잉글리시 쉽독</item>
-        <item>오터 하운드</item>
-        <item>파피용</item>
-        <item>페키니즈</item>
-        <item>펨브록 웰시 코기</item>
-        <item>포메라니안</item>
-        <item>퍼그</item>
-        <item>레드본 쿤하운드</item>
-        <item>로디지안 리지백</item>
-        <item>로트바일러</item>
-        <item>보스턴 테리어</item>
-        <item>돌 (Dhole)</item>
-        <item>이비전 하운드</item>
-        <item>말티즈</item>
-        <item>세인트 버나드</item>
-        <item>살루키</item>
-        <item>사모예드</item>
-        <item>스키퍼키</item>
-        <item>스코티시 테리어</item>
-        <item>스코티시 디어하운드</item>
-        <item>실리엄 테리어</item>
-        <item>셔틀랜드 쉽독</item>
-        <item>시베리안 허스키</item>
-        <item>실키 테리어</item>
-        <item>스타포드셔 불 테리어</item>
-        <item>스탠다드 푸들</item>
-        <item>스탠다드 슈나우저</item>
-        <item>서식스 스패니얼</item>
-        <item>블랙 앤 탄 쿤하운드</item>
-        <item>티베탄 마스티프</item>
-        <item>티베탄 테리어</item>
-        <item>토이푸들</item>
-        <item>잉글리쉬 토이 테리어</item>
-        <item>시츄</item>
-        <item>비즐라</item>
-        <item>트리잉 워커 쿤하운드</item>
-        <item>와이머라너</item>
-        <item>웰시 스프링어 스패니얼</item>
-        <item>웨스트 하이랜드 화이트 테리어</item>
-        <item>휘핏</item>
-        <item>요크셔 테리어</item>
-    </string-array>
-    <string-array name="breeds_array_en">
-        <item>Affenpinscher</item>
-        <item>Afghan Hound</item>
-        <item>African Hunting Dog</item>
-        <item>Airedale Terrier</item>
-        <item>American Staffordshire Terrier</item>
-        <item>Appenzeller Sennenhund</item>
-        <item>Australian Terrier</item>
-        <item>Basenji</item>
-        <item>Basset Hound</item>
-        <item>Beagle</item>
-        <item>Bedlington Terrier</item>
-        <item>Bernese Mountain Dog</item>
-        <item>Blenheim Spaniel</item>
-        <item>Bloodhound</item>
-        <item>Bluetick Coonhound</item>
-        <item>Border Collie</item>
-        <item>Border Terrier</item>
-        <item>Borzoi</item>
-        <item>Bouvier Des Flandres</item>
-        <item>Boxer (dog)</item>
-        <item>Griffon Bruxellois</item>
-        <item>Briard</item>
-        <item>Brittany Spaniel</item>
-        <item>Bullmastiff</item>
-        <item>Cairn Terrier</item>
-        <item>Cardigan Welsh Corgi</item>
-        <item>Chesapeake Bay Retriever</item>
-        <item>Chihuahua (dog)</item>
-        <item>Chow Chow</item>
-        <item>Clumber Spaniel</item>
-        <item>Flat-coated Retriever</item>
-        <item>Soft-coated Wheaten Terrier</item>
-        <item>Cocker Spaniel</item>
-        <item>Collie</item>
-        <item>Curly Coated Retriever</item>
-        <item>Dandie Dinmont Terrier</item>
-        <item>Dingo</item>
-        <item>Doberman</item>
-        <item>English Foxhound</item>
-        <item>English Setter</item>
-        <item>English Springer Spaniel</item>
-        <item>Entlebucher Mountain Dog</item>
-        <item>Eskimo Dog</item>
-        <item>French Bulldog</item>
-        <item>German Shepherd</item>
-        <item>Giant Schnauzer</item>
-        <item>Golden Retriever</item>
-        <item>Gordon Setter</item>
-        <item>Greater Swiss Mountain Dog</item>
-        <item>Great Dane</item>
-        <item>Great Pyrenees</item>
-        <item>Groenendael dog</item>
-        <item>Fox Terrier</item>
-        <item>German Shorthaired Pointer</item>
-        <item>Irish Setter</item>
-        <item>Irish Terrier</item>
-        <item>Irish Water Spaniel</item>
-        <item>Irish Wolfhound</item>
-        <item>Italian Greyhound</item>
-        <item>Japanese Chin</item>
-        <item>Keeshond</item>
-        <item>Kelpie</item>
-        <item>Kerry Blue Terrier</item>
-        <item>Komondor</item>
-        <item>Kuvasz</item>
-        <item>Labrador Retriever</item>
-        <item>Lakeland Terrier</item>
-        <item>Leonberger</item>
-        <item>Lhasa Apso</item>
-        <item>Dachshund</item>
-        <item>Alaskan Malamute</item>
-        <item>Malinois dog</item>
-        <item>Mexican Hairless Dog</item>
-        <item>Miniature Pinscher</item>
-        <item>Miniature Poodle</item>
-        <item>Miniature Schnauzer</item>
-        <item>Newfoundland dog</item>
-        <item>Norfolk Terrier</item>
-        <item>Norwegian Elkhound</item>
-        <item>Norwich Terrier</item>
-        <item>Old English Sheepdog</item>
-        <item>Otterhound</item>
-        <item>Papillon dog</item>
-        <item>Pekingese</item>
-        <item>Pembroke Welsh Corgi</item>
-        <item>Pomeranian</item>
-        <item>퍼그</item>
-        <item>Redbone Coonhound</item>
-        <item>Rhodesian Ridgeback</item>
-        <item>Rottweiler</item>
-        <item>Boston Terrier</item>
-        <item>Dhole</item>
-        <item>Ibizan Hound</item>
-        <item>말티즈</item>
-        <item>Saint Bernard</item>
-        <item>Saluki</item>
-        <item>Samoyed dog</item>
-        <item>Schipperke</item>
-        <item>Scotch Terrier</item>
-        <item>Scottish Deerhound</item>
-        <item>Sealyham Terrier</item>
-        <item>Shetland Sheepdog</item>
-        <item>Siberian Husky</item>
-        <item>Silky Terrier</item>
-        <item>Staffordshire Bull Terrier</item>
-        <item>Standard Poodle</item>
-        <item>Standard Schnauzer</item>
-        <item>Sussex Spaniel</item>
-        <item>Black and Tan Coonhound</item>
-        <item>Tibetan Mastiff</item>
-        <item>Tibetan Terrier</item>
-        <item>Toy Poodle</item>
-        <item>English Toy Terrier (Black &amp; Tan)</item>
-        <item>Shih Tzu</item>
-        <item>Vizsla</item>
-        <item>Treeing Walker Coonhound</item>
-        <item>Weimaraner</item>
-        <item>Welsh Springer Spaniel</item>
-        <item>West Highland White Terrier</item>
-        <item>Whippet</item>
-        <item>Yorkshire Terrier</item>
-    </string-array>
+<string name="app_name">Dog Breed Classifier</string>
+<string-array name="breeds_array">
+<item>아펜핀셔</item>
+<item>아프간하운드</item>
+<item>아프리카들개</item>
+<item>에어데일_테리어</item>
+<item>아메리칸_스태퍼드셔_테리어</item>
+<item>아펜젤러세넨훈드</item>
+<item>오스트레일리안_테리어</item>
+<item>바센지</item>
+<item>바셋_하운드</item>
+<item>비글</item>
+<item>베들링턴_테리어</item>
+<item>버나즈_마운틴_독</item>
+<item>킹_찰스_스패니얼</item>
+<item>블러드하운드</item>
+<item>블루틱_쿤_하운드</item>
+<item>보더콜리</item>
+<item>보더_테리어</item>
+<item>보르조이</item>
+<item>부비에데플랑드르</item>
+<item>복서</item>
+<item>브뤼셀_그리펀</item>
+<item>브리아드</item>
+<item>브리트니</item>
+<item>불마스티프</item>
+<item>케언_테리어</item>
+<item>카디건_웰시_코기</item>
+<item>체서피크베이_리트리버</item>
+<item>치와와</item>
+<item>차우차우</item>
+<item>클럼버_스파니엘</item>
+<item>플랫_코티드_리트리버</item>
+<item>아이리쉬_소프트코티드_휘튼_테리어</item>
+<item>코카_스패니얼</item>
+<item>콜리</item>
+<item>컬리_코티드_리트리버</item>
+<item>댄디_딘몬트_테리어</item>
+<item>딩고</item>
+<item>도베르만</item>
+<item>잉글리시_폭스하운드</item>
+<item>르웰린</item>
+<item>잉글리시_스프링어_스패니얼</item>
+<item>엔틀버쳐_마운틴_독</item>
+<item>아메리칸_에스키모_도그</item>
+<item>프렌치_불독</item>
+<item>저먼_셰퍼드</item>
+<item>자이언트_슈나우저</item>
+<item>골든_리트리버</item>
+<item>고든_세터</item>
+<item>그레이터_스위스_마운틴_도그</item>
+<item>그레이트_데인</item>
+<item>그레이트_피레니즈</item>
+<item>그루넨달</item>
+<item>폭스_테리어</item>
+<item>저먼_쇼트헤어드_포인터</item>
+<item>아이리시_세터</item>
+<item>아이리시_테리어</item>
+<item>아이리시_워터_스패니얼</item>
+<item>아이리시_울프하운드</item>
+<item>이탈리안_그레이하운드</item>
+<item>제페니스_친</item>
+<item>키스혼드</item>
+<item>오스트레일리안_켈피</item>
+<item>케리_블루_테리어</item>
+<item>코몬돌</item>
+<item>쿠바츠</item>
+<item>래브라도_리트리버</item>
+<item>레이클랜드_테리어</item>
+<item>레온베르거</item>
+<item>라사압소</item>
+<item>닥스훈트</item>
+<item>알래스칸_맬러뮤트</item>
+<item>말리노이즈</item>
+<item>멕시칸_헤어리스_도그</item>
+<item>미니어처_핀셔</item>
+<item>미니어처_푸들</item>
+<item>미니어처_슈나우저</item>
+<item>뉴펀들랜드</item>
+<item>노퍽_테리어</item>
+<item>노르웨이언_엘크하운드</item>
+<item>노리치_테리어</item>
+<item>올드_잉글리시_쉽독</item>
+<item>오터_하운드</item>
+<item>파피용</item>
+<item>페키니즈</item>
+<item>펨브록_웰시_코기</item>
+<item>포메라니안</item>
+<item>퍼그</item>
+<item>레드본_쿤하운드</item>
+<item>로디지안_리지백</item>
+<item>로트바일러</item>
+<item>보스턴_테리어</item>
+<item>돌_(Dhole)</item>
+<item>이비전_하운드</item>
+<item>말티즈</item>
+<item>세인트_버나드</item>
+<item>살루키</item>
+<item>사모예드</item>
+<item>스키퍼키</item>
+<item>스코티시_테리어</item>
+<item>스코티시_디어하운드</item>
+<item>실리엄_테리어</item>
+<item>셔틀랜드_쉽독</item>
+<item>시베리안_허스키</item>
+<item>실키_테리어</item>
+<item>스타포드셔_불_테리어</item>
+<item>스탠다드_푸들</item>
+<item>스탠다드_슈나우저</item>
+<item>서식스_스패니얼</item>
+<item>블랙_앤_탄_쿤하운드</item>
+<item>티베탄_마스티프</item>
+<item>티베탄_테리어</item>
+<item>토이푸들</item>
+<item>잉글리쉬_토이_테리어</item>
+<item>시츄</item>
+<item>비즐라</item>
+<item>트리잉_워커_쿤하운드</item>
+<item>와이머라너</item>
+<item>웰시_스프링어_스패니얼</item>
+<item>웨스트_하이랜드_화이트_테리어</item>
+<item>휘핏</item>
+<item>요크셔_테리어</item>
+</string-array>
+<string-array name="breeds_array_en">
+<item>Affenpinscher</item>
+<item>Afghan_Hound</item>
+<item>African_Hunting_Dog</item>
+<item>Airedale_Terrier</item>
+<item>American_Staffordshire_Terrier</item>
+<item>Appenzeller_Sennenhund</item>
+<item>Australian_Terrier</item>
+<item>Basenji</item>
+<item>Basset_Hound</item>
+<item>Beagle</item>
+<item>Bedlington_Terrier</item>
+<item>Bernese_Mountain_Dog</item>
+<item>Blenheim_Spaniel</item>
+<item>Bloodhound</item>
+<item>Bluetick_Coonhound</item>
+<item>Border Collie</item>
+<item>Border Terrier</item>
+<item>Borzoi</item>
+<item>Bouvier Des Flandres</item>
+<item>Boxer (dog)</item>
+<item>Griffon Bruxellois</item>
+<item>Briard</item>
+<item>Brittany Spaniel</item>
+<item>Bullmastiff</item>
+<item>Cairn Terrier</item>
+<item>Cardigan Welsh Corgi</item>
+<item>Chesapeake Bay Retriever</item>
+<item>Chihuahua (dog)</item>
+<item>Chow Chow</item>
+<item>Clumber Spaniel</item>
+<item>Flat-coated Retriever</item>
+<item>Soft-coated Wheaten Terrier</item>
+<item>Cocker Spaniel</item>
+<item>Collie</item>
+<item>Curly Coated Retriever</item>
+<item>Dandie Dinmont Terrier</item>
+<item>Dingo</item>
+<item>Doberman</item>
+<item>English Foxhound</item>
+<item>English Setter</item>
+<item>English Springer Spaniel</item>
+<item>Entlebucher Mountain Dog</item>
+<item>Eskimo Dog</item>
+<item>French Bulldog</item>
+<item>German Shepherd</item>
+<item>Giant Schnauzer</item>
+<item>Golden Retriever</item>
+<item>Gordon Setter</item>
+<item>Greater Swiss Mountain Dog</item>
+<item>Great Dane</item>
+<item>Great Pyrenees</item>
+<item>Groenendael dog</item>
+<item>Fox Terrier</item>
+<item>German Shorthaired Pointer</item>
+<item>Irish Setter</item>
+<item>Irish Terrier</item>
+<item>Irish Water Spaniel</item>
+<item>Irish Wolfhound</item>
+<item>Italian Greyhound</item>
+<item>Japanese Chin</item>
+<item>Keeshond</item>
+<item>Kelpie</item>
+<item>Kerry Blue Terrier</item>
+<item>Komondor</item>
+<item>Kuvasz</item>
+<item>Labrador Retriever</item>
+<item>Lakeland Terrier</item>
+<item>Leonberger</item>
+<item>Lhasa Apso</item>
+<item>Dachshund</item>
+<item>Alaskan Malamute</item>
+<item>Malinois dog</item>
+<item>Mexican Hairless Dog</item>
+<item>Miniature Pinscher</item>
+<item>Miniature Poodle</item>
+<item>Miniature Schnauzer</item>
+<item>Newfoundland dog</item>
+<item>Norfolk Terrier</item>
+<item>Norwegian Elkhound</item>
+<item>Norwich Terrier</item>
+<item>Old English Sheepdog</item>
+<item>Otterhound</item>
+<item>Papillon dog</item>
+<item>Pekingese</item>
+<item>Pembroke Welsh Corgi</item>
+<item>Pomeranian</item>
+<item>Pug</item>
+<item>Redbone Coonhound</item>
+<item>Rhodesian Ridgeback</item>
+<item>Rottweiler</item>
+<item>Boston Terrier</item>
+<item>Dhole</item>
+<item>Ibizan Hound</item>
+<item>Maltese</item>
+<item>Saint Bernard</item>
+<item>Saluki</item>
+<item>Samoyed dog</item>
+<item>Schipperke</item>
+<item>Scotch Terrier</item>
+<item>Scottish Deerhound</item>
+<item>Sealyham Terrier</item>
+<item>Shetland Sheepdog</item>
+<item>Siberian Husky</item>
+<item>Silky Terrier</item>
+<item>Staffordshire Bull Terrier</item>
+<item>Standard Poodle</item>
+<item>Standard Schnauzer</item>
+<item>Sussex Spaniel</item>
+<item>Black and Tan Coonhound</item>
+<item>Tibetan Mastiff</item>
+<item>Tibetan Terrier</item>
+<item>Toy Poodle</item>
+<item>English Toy Terrier (Black &amp; Tan)</item>
+<item>Shih Tzu</item>
+<item>Vizsla</item>
+<item>Treeing Walker Coonhound</item>
+<item>Weimaraner</item>
+<item>Welsh Springer Spaniel</item>
+<item>West Highland White Terrier</item>
+<item>Whippet</item>
+<item>Yorkshire Terrier</item>
+</string-array>
+
+    <string name="Maltese_info">
+◈ 말티즈의 역사\n
+ ☞ 말티즈의 기원은 불분명하나 지중해의 섬 \'말타\'에서 유래했다는 설이 정설로 인정받는다.\n
+     \t영어로 "에인션트 도그 오브 몰타(Ancient dog of malta)", "로만 레이디즈 도그(Roman ladies\' dog)", "몰티즈 라이언 도그(Maltese lion dog)"로도 잘 알려져 있다.\n
+     \t고대 로마, 그리스 시절부터 있었던 역사가 가장 오래된 반려견으로 아리스토텔레스가 카니스 멜리타우스(Canis Melitaeus)라고 정의내리기도 했다.\n
+     \t한 때 비슷한 견종인 비숑으로 잘못 불리기도 했으나 19세기에 아메리칸 커널 클럽이 "말티즈"라는 이름을 공공연하게 정착시킨다.\n
+     \t유목민을 통해 중동을 거쳐 유럽 전역으로 퍼진 것으로 추정된다.\n
+     \t여타 소형견들과 다른점은 원래부터 작았다는 점으로 대부분의 소형견은 시간이 지남에 따라 소형화 되었으나 말티즈는 본래 체구가 작았다.\n
+     \t사냥견으로 이용된 역사 없이 순수 관상용으로만 길러진 견종이라는 점 또한 독특하다.\n\n
+
+◈ 말티즈의 특징\n
+ ☞ 국내에서 가장 많이 키우는 견종으로 반려견의 약 20%가 말티즈이다.\n
+      \t둥근 얼굴에 짧은 입, 검은 코와 갈색 눈이 특징이다.\n
+      \t경쾌하고 부드럽게 걷는 편이다.\n
+      \t어깨높이 18~30cm, 몸무게 1.4~4kg의 체구가 작은 소형견으로 귀는 긴 털과 함께 쳐져있다.\n
+      \t≫ 털 : 단일모의 길고 비단 같은 털로 순백색 · 옅은 상아색 등의 색을 띈다.\n
+          \t\t잘 엉키니 빗질을 자주 해주어야 한다.\n
+      \t≫ 성격 : 매우 활발하고 생기 발랄하여 나이가 들어도 에너지가 넘친다.\n
+          \t\t좁은 공간에서도 적응을 잘 하고 폐쇄적인 것을 선호하여 아파트나 주택에서 키우기 적합하다.\n
+          \t\t처음 만나는 강아지나 사람에게도 애교가 많고 사교성이 좋다.\n\n
+
+◈ 말티즈의 건강&amp;질병\n
+ ☞ 말티즈는 평균 15년을 살며, 종의 특성상 관절이 약하게 태어나기 때문에 관절 건강에 주의를 기울여야 한다.\n
+     \t추위와 더위를 잘 타는 견종으로 과도한 야외 운동은 적절치 못하다.\n
+     \t유전병으로는 슬개골 탈구, 진행성 망막 위축증, 하얀 강아지 떨림 증후군, 기관 허탈 등이 있다.\n
+     \t눈물 자국이 잘 생기는 대표적인 견종으로 눈물자국을 자주 닦아주어야 한다.\n
+     \t또한 치아 관련 문제가 발생할 수 있으니 일주일에 한 번정도 개 전용 치약과 칫솔로 양치를 시켜주는 것이 좋다.\n
+     \t암컷은 자궁축농증을 주의해야하는데 다음과 같은 증상을 보인다면 자궁축농증을 의심해 볼 필요가 있다.\n
+     \t≫ 물을 허겁지겁 많이 먹는다.\n
+     \t≫ 생식기에서 노란물이 나온다.\n
+     \t≫ 코가 마르고 갈라진다.\n
+     \t≫ 먹은걸 토한다.\n
+     \t≫ 눈에 띄게 식욕이 없다.\n
+     \t≫ 사람이 집에 와도 크게 반기지 않는다.\n
+     \t≫ 자꾸 구석으로 이동한다.\n
+     \t≫ 만지려고 하면 짖으면서 물려고 한다.\n
+    </string>
+    <string name="Pomeranian_info">
+◈ 포메라니안의 역사\n
+ ☞ 포메라니안의 조상은 독일 스피츠로 북극 지역에서 많은 일을 하는 개였다.\n
+     \t폴란드 북부와 독일 사이에 있는 포메라니아 지방과 관련이 있는 것을 보고 포메라니안이라고 불리게 되었다.\n
+     \t1767년 샬럿 왕비가 포메라니안 두 마리를 영국으로 들여옴으로서 포메라니안 품종 발전에 영향을 끼쳤다.\n
+     \t이 때의 포메라니안은 현재와 생김새가 같지만 무게가 14~23kg 이었다고 한다.\n
+     \t샬럿 왕비의 손녀 빅토리아 여왕이 제일 좋아했던 포메라니안은 무게가 5.4kg인 작은 개체였는데, 이를 계기로 포메라니안의 소형화가 이루어졌다.\n
+     \t국제애견협회는 1998년에 포메라니안을 독일 스피츠의 일종으로 포함시켰다.\n
+     \t미국에서 인기가 매우 높은 품종으로 2000~2010년 동안 미국 애견 협회가 선정한 인기 순위에서 15위권 안에 들었다.\n
+     \t폼, 폼폼이라는 이름으로도 불린다.\n
+\n
+◈ 포메라니안의 특징\n
+ ☞ 크기 14~18cm, 몸무게 1.8~4kg의 소형견이다.\n
+     \t이마가 볼록하고 작고 둥근 머리에 커다란 눈을 지녔다.\n
+     \t얼굴과 가슴부분의 털이 특히 길고 꼬리 부분은 말려 올라가 있다.\n
+     \t주변 환경의 변화에 예민하게 반응하여 짖는 버릇이 있는데 이 때문에 과도하게 짖는 것이 습관화 될 수 있다.\n
+     \t≫ 털 : 이중모로 바깥쪽의 털은 길고, 직모이며 거친 질감인 반면에 속 털은 부드러우며 짧고 숱이 많다.\n
+         \t\t속털은 1년에 두 번씩 털갈이가 일어난다.\n
+         \t\t털 색은 흰색 · 검정색 · 빨간색 · 오렌지색 · 크림색 · 파란색 · 흑담비색 · 얼룩무늬 등으로 스펙트럼이 넓다.\n
+     \t≫ 성격 : 원기왕성하고 활발한 편이다.\n
+         \t\t흥분을 잘 하고 성질이 급하며 호기심이 많다.\n
+         \t\t주인과의 유대감을 빨리 형성한다.\n
+         \t\t다른 개체에 대한 경계심과 공격성이 강하여 사회성이 좋은 편은 아니다.\n
+\n
+◈ 포메라니안의 건강&amp;질병\n
+ ☞ 평균 수명은 12~15년 정도이다. 대체로 튼튼하고 건강한 견종이지만 골격이 가늘어 무리한 산책이나 운동은 금물이다.\n
+     \t모든 강아지에게서 흔히 볼 수 있는 슬개골 탈구와 기관 허탈, 피부병, 탈모증에 주의할 필요가 있다.\n
+     \t또한 포메라니안은 건강 탈모증과 과다색소침착을 동반하는 "흑피병" 이라는 피부병에 걸릴 수 있다.\n
+     \t털이 길기 때문에 털 관리를 해주는 것이 중요하다.\n
+
+    </string>
+    <string name="Poodle_info">
+        ◈ 푸들의 역사\n
+ ☞ 푸들은 본래 사냥개, 또는 잡은 사냥감을 찾아오는 워터리트리버로 사육되었으나 시간이 흐름에 따라 반려견으로 인기를 끌었다.\n
+     \t이름의 유래는 독일어로 \'물장구를 치다\' 라는 뜻의 Pudel(Pudeln) 에서 유래되었다.\n
+     \t오랜 역사를 지닌 품종으로 기원전 30년 경 로마 황제의 기념비에 푸들의 모습이 조각되어 있다.\n
+     \t푸들은 18세기에 원산지인 독일에서 프랑스로 유입되면서 개량과 소형화를 거쳐 프랑스 귀부인들에게 큰 사랑을 받았다.\n
+     \t이로 인해 프랑스의 국견으로 인정받았다.\n
+     \t19 세기에 이르러 대중에게 반려견으로 보급되었다.\n
+\n
+◈ 푸들의 특징\n
+ ☞ 눈이 검고, 주로 둥글거나 튀어나와 있으며 귀는 머리에 붙어 아래를 향하고 있다.\n
+     \t가슴은 길고 넓으며, 허리는 짧다.\n
+     \t대체적으로 근육질이다.\n
+     \t푸들은 체구에 따라 스탠다드, 미디엄, 미니어처, 토이 대표적으로 4가지로 분류된다.\n
+     \t≫ 스탠다드: 어깨높이 38cm 이상, 몸무게 20~27kg\n
+     \t≫ 미디엄: 어깨높이 35~45cm, 몸무게 6~20kg\n
+     \t≫ 미니어처: 어깨높이 25~35cm, 몸무게 3~6kg\n
+     \t≫ 토이: 어깨높이 25cm 이하, 몸무게 2~3kg\n
+     \t≫ 털 : 털이 길고 양털같이 곱슬곱슬하다. 흰색 · 검정색 · 갈색 · 회색 등의 털 색을 지녔다.\n
+     \t≫ 성격 : 총명하고 활발,명랑하며, 애교와 재롱이 많다.\n
+         \t\t혼자 있기 싫어하여 말썽을 부리거나 짖기도 한다.\n
+       \n
+◈ 푸들의 건강&amp;질병\n
+ ☞  푸들은 특히 유전병에 취약하므로 주의를 기울여야한다.\n
+      \t크기와 종류에 따라 주요 유전병이 다르다.\n
+     \t≫ 스탠다드: 결막염, 각막염, 유루증, 백내장, 뇌전등\n
+     \t≫ 미디엄: 폐암\n
+     \t≫ 미니어처: 백내장, 뇌전증 \n
+     \t≫ 토이: 백내장, 폐암\n
+      \t\t털이 길고 곱슬거려 잘 엉킬 수 있으니 자주 빗질해주어야 한다.\n
+      \t\t귓속에 털이 많아 귓병에 걸릴 확률이 높으므로 귀 속의 털을 수시로 정리해주어야 한다.\n
+      \t\t활동적인 견종으로 뛰어놀기를 좋아하기 때문에 산책을 주기적으로 시켜주는 것이 좋다.\n
+    </string>
+    <string name="Shihtzu_info">
+◈ 시추의 역사\n
+ ☞ 중국 티베트 지역이 원산지로 기원후 620년 경부터 있었던 역사가 깊은 품종이다.\n
+     \t과거에 중국 황실에서 키우던 견종이며 불교와 연관이 깊어 신성한 개로 추앙받았다.\n
+     \t중국에서는 \'사자개\' 라는 뜻의 狮子狗(스쯔거우) 라고 부르는데 이 이름의 로마식 표기법인 shih-tzu kou가 현재 \'시추\'의 유래이다.\n
+     \t1930년대 영국인 여행자가 중국에서 시추 두 쌍을 데려가면서 유럽에 퍼지게 되었다.\n
+     \t2차 세계 대전 이후 미국에 소개되었는데, 미국과 캐나다에서 폭발적인 관심을 받아 1969년 미국 캔넬 클럽에 정식으로 등록 되었다.\n
+\n
+◈ 시추의 특징\n
+ ☞ 크기 22cm~27cm, 몸무게 4~8.1kg의 소형견이다.\n
+     \t주둥이가 짧고 눈이 큰 편이며 길고 화려한 털이 특징이다.\n
+     \t식탐이 강하여 뚱보라는 별명이 붙었다.\n
+     \t≫ 털 : 장모종, 이중모이다. 털빠짐이 적다. 주로 흰색과 갈색 · 흰색과 검정색의 조합의 색상을 띈다.\n
+         \t\t간혹 흰색과 회색의 조합도 보인다.\n
+     \t≫ 성격 : 영리하고 눈치가 빠르다.\n
+         \t\t사교적이고 주인을 잘 따르며 감정 표현이 풍부하다.\n
+         \t\t자존심이 세고 고집이 강하여 주인 이외는 잘 따르지 않는다.\n
+         \t\t스트레스를 받으면 신경질적인 면을 보이기도 한다.\n
+\n
+◈ 시추의 건강&amp;질병\n
+ ☞ 유전적으로 신장이 약하기 때문에 신장 관리에 주의를 기울여야 한다.\n
+     \t안구가 돌출되어 있어 각막염, 결막염 등 안구 질환에 걸리기 쉬우니 눈 주변의 긴 털을 관리해 줄 필요가 있다.\n
+     \t얼굴 주변의 털을 제대로 관리해 주지 않으면 호흡기 질환, 외이염 등에 감염될 수 있으니 털 관리가 어렵다면 짧게 잘라주는 것이 좋다.\n
+
+
+    </string>
+    <string name="Welsh_corgi_info">
+◈ 웰시코기의 역사\n
+ ☞ 11세기 경, 플랑드르의 직공들이 웨일스로 들여온 견종이다.\n
+     \t웰시코기는 목축견의 후손으로 과거의 목장 주인들은 자신의 업무를 도울 사역견들을 키웠는데, 이런 목적에서 웰시코기가 적합했던 것이다.\n
+     \t이름은 웨일스(Weish) 지방의 다리가 짧고 코가 뾰족한 개(corgi) 라는 뜻이다.\n
+     \t영국 왕실의 사랑을 받은 견종으로 헨리 2세, 리처드 1세, 웨일즈 6세, 엘리자베스 2세가 웰시코기를 키웠다.\n
+     \t특히 엘리자베스 2세는 펨브로크 웰시코기를 12마리나 길러 \'영국 왕실의 개\' 라는 명칭이 붙기도 하였다.\n
+\n
+◈ 웰시코기의 특징\n
+ ☞ 몸통이 길고 다리가 짧은 단모종 중형견이다. 코가 검고 입술라인이 뚜렷하다.\n
+     \t몸 길이는 대개 25~31cm 이고, 몸무게는 10kg~17kg 이다.\n
+     \t목축견으로 활동성이 뛰어나고 운동량이 많다.\n
+     \t흔히 펨브로크 웰시 코기와 카디건 웰시 코기 두 종류로 나뉜다.\n
+     \t≫ 펨브로크 웰시 코기: 조상이 사모예드, 키스혼드, 포메라니안의 조상의 혈통이다.\n
+      \t\t꼬리가 짧거나 없고 귀 끝이 뾰족하다. 털 색은 주로 회갈색 · 적갈색 · 갈색 · 검정색 등을 띈다.\n
+     \t≫ 카디건 웰시 코기: 닥스훈트 조상의 혈통이다. \n
+      \t\t펨브로크 웰시 코기와의 가장 큰 차이점은 꼬리 길이로 카디건은 꼬리가 길다. 귀 끝이 펨브로크보다 둥글다.\n
+      \t\t단모에서 중장모의 적갈색 · 황갈색 · 흰색 · 흰색과 검정색이 섞인 얼룩 등의 털을 지닌다.\n
+     \t≫ 털 : 이중모로 이루어져 있어 털빠짐이 심하므로 매일 빗질을 해주는 것이 좋다.\n
+     \t≫ 성격 : 느긋하고 친절하며 사람을 잘 따르는 것으로 유명하다.\n
+         \t\t외향적이고 영리하여 훈련에 빨리 적응하며 높은 성과율을 보여준다.\n
+         \t\t호기심이 많은 편이다.\n
+\n
+◈ 웰시코기의 건강&amp;질병\n
+ ☞ 평균 수명은 11~13세이다. 전반적으로 건강한 견종이다.\n
+     \t식성이 좋아 비만이 되기 쉬우므로 식단 관리와 주기적인 산책이 필요하다.\n
+     \t주요 질병으로는 림프종, 추간판탈출증(디스크), 고관절이형성증, 뇌전증, 퇴행성 골수염, 수정체 이탈, 폰빌레브란트병, 점진적 망막 위축 및 요로 결석 등이 있다.\n
+     \t특히 높은 곳에 뛰어 올라가거나 내려갈 때 주의하지 않으면 척추 디스크나 관절염이 생길 수 있으니 조심해야 한다.\n
+
+    </string>
+    <string name="Yorkshire_info">
+◈ 요크셔테리어의 역사\n
+ ☞ 역사가 짧은 견종으로 19세기 중반 영국의 요크셔 지방 공업지대에서 쥐를 잡기 위해 개량된 품종이다.\n
+     \t테리어는 \'땅을 파다\'라는 라틴어에서 유래되었으며 사냥개를 지칭한다.\n
+     \t본래 요크셔테리어는 5~6kg 정도로 체구가 현재보다 컸으나 1880년 대에 미국으로 건너가면서 여러 차례에 걸친 품종 교배로 인해 소형화 되었다.\n
+     \t별명으로 \'요키\', \'요크\' 가 있다.\n
+\n
+◈ 요크셔테리어의 특징\n
+ ☞ 크기 20~23cm, 몸무게는 3kg 전후인 소형견이다.\n
+     \t털에 광택이 있고 우아하며 걷는 모습에 기품이 있어 \'움직이는 보석\' 이라고도 한다.\n
+     \t머리가 좋고 주인에 대한 충성심이 강하지만 낯선 사람에겐 경계가 심하며 짖기도 한다.\n
+     \t≫ 털 : 머리와 가슴,다리를 제외하고 주로 다크블루 스틸 색상을 띈다. 단일모로 털이 길고 화려하다.\n
+     \t≫ 성격 : 사는 환경에 따라 달라지며 온순한 성격과 천진난만한 성격 중 하나를 보인다.\n
+         \t\t소유욕이 강하고 고집이 세서 질투가 많으며 응석이 심하다.\n
+         \t\t외로움을 잘 타서 혼자 있는걸 싫어한다.\n
+         \t\t설치류를 잡던 습성이 남아있기 때문에 활발하며 용감하다.\n
+\n
+◈ 요크셔테리어의 건강&amp;질병\n
+ ☞ 수명은 13~16년 정도이다. 소화 계통이 예민하여 설사, 구토가 발생할 수 있으니 식단 관리가 중요하다.\n
+     \t심장과 뼈가 약해 슬개골 탈구, 심장 판막증 등이 발생할 수 있으니 주의해야한다.\n
+     \t운동량이 많은 편에 속하는 견종이지만 뼈가 약하므로 산책을 오래 시키는 것은 좋지 않다.\n
+     \t요크셔테리어는 기관지염, 림프관확장증, 간문맥전신단락증, 백내장, 녹내장, 건성각결막염, 고혈압, 뇌졸중, 동맥경화, 고지혈증, 당뇨병 등 질병이 많은 축에 속하니 각별한 주의가 필요하다.\n
+     \t털이 길어 쉽게 엉키므로 잘 빗어주어야 한다.\n
+    </string>
+
 </resources>

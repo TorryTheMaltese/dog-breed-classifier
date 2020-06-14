@@ -33,6 +33,18 @@
                 android:gravity="center"
                 />
 
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="강아지 저장하기"
+                android:textColor="@color/colorBackground"
+                android:layout_margin="20dp"
+                android:visibility="invisible"
+                android:background="@drawable/ic_rounded_image"
+                android:backgroundTint="@color/colorAccent"
+                />
+
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/result_chart"
                 android:layout_width="match_parent"
@@ -40,12 +52,6 @@
                 android:layout_margin="30dp"
                 android:contentDescription="TEST CHART" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="HOME"
-                android:onClick="goHomePage"
-                android:layout_margin="20dp" />
 
         </LinearLayout>
     </ScrollView>
